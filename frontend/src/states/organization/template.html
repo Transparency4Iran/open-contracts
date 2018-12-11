@@ -1,0 +1,197 @@
+<section class="white padding-top-20 padding-bottom-10">
+  <div class="container">
+    <div class="row" ng-if="$ctrl.organization">
+      <div class="col-sm-12">
+        <div>
+          <h1 class="weight-500 margin-bottom-0 size-20 inline-block">
+            <span ng-repeat="org in $ctrl.organization.path">
+              <span ng-if="$index != 0"> <i class="fa fa-angle-double-left"></i> </span>
+              <a ui-sref="organization({'id':org.id})">
+                {{org.display_name}}
+              </a>
+            </span>
+          </h1>
+
+          <div class="margin-right-10 inline-block" ng-if="$ctrl.organization.budgets.length >0">
+            <div ng-repeat="budget in $ctrl.organization.budgets | orderBy:'year'">
+              <label class="size-16">
+                بودجه سال
+                <b>
+                  {{budget.year | pNumber}}
+                </b>
+                :
+              </label>
+              <span>
+                {{budget.amount | pNumber | price}}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <hr>
+      </div>
+    </div>
+
+    <div class="row" ng-if="$ctrl.organization != undefined">
+      <div class="col-sm-12">
+        <h2 class="contrants__title margin-bottom-0">
+          سازمان‌های ذیل
+        </h2>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div id="children"></div>
+
+        <h2 class="contrants__title margin-top-10 margin-bottom-0"> جزئیات سازمان‌های ذیل</h2>
+        <md-table-container>
+          <div class="scrollbar" style="height: calc(100vh - 445px)">
+            <table md-table md-progress="promise">
+              <thead md-head md-order="$ctrl.childrenOrder">
+                <tr md-row>
+                  <th md-column md-order-by="name">
+                    <span>
+                      نام سازمان
+                    </span>
+                  </th>
+                  <th md-column md-order-by="implicit_sum">
+                    <span>
+                      مجموع مبلغ قراردادها
+                    </span>
+                  </th>
+                  <th md-column md-order-by="implicit_count">
+                    <span>
+                      تعداد قراردادها
+                    </span>
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody md-body>
+                <tr md-row ng-repeat="org in $ctrl.children | orderBy:$ctrl.childrenOrder ">
+                  <td md-cell>
+                    <a ui-sref="organization({'id':org.id})">{{org.display_name}}</a>
+                  </td>
+                  <td md-cell>{{org.implicit_sum |pNumber | price}}</td>
+                  <td md-cell>{{org.implicit_count |pNumber }}</td>
+              </tbody>
+            </table>
+          </div>
+        </md-table-container>
+
+        <hr>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="white padding-bottom-20" ng-show="$ctrl.contracts">
+  <div class="container">
+    <div class="row" ng-if="$ctrl.organization">
+      <div class="col-sm-12">
+        <h2 class="contrants__title margin-bottom-10">
+          لیست قراردادهای مستقیم سازمان
+        </h2>
+
+        <md-table-container>
+          <div class="scrollbar" style="height: calc(100vh - 465px)">
+            <table md-table md-progress="promise">
+              <thead md-head md-order="$ctrl.contractsOrder">
+                <tr md-row>
+                  <!-- <th md-column md-order-by="code">
+                    <span>
+                      کد قرارداد
+                    </span>
+                  </th> -->
+                  <th class="min-width-250" md-column md-order-by="title">
+                    <span>
+                      عنوان
+                    </span>
+                  </th>
+                  <th class="min-width-90" md-column md-order-by="contract_date">
+                    <span>
+                      تاریخ قرارداد
+                    </span>
+                  </th>
+                  <th class="min-width-90" md-column md-order-by="end_date">
+                    <span>
+                      تاریخ خاتمه
+                    </span>
+                  </th>
+                  <th class="min-width-80" md-column md-order-by="duration">
+                    <span>
+                      مهلت
+                    </span>
+                  </th>
+                  <th md-column md-order-by="price">
+                    <span>
+                      مبلغ(ریال)
+                    </span>
+                  </th>
+                  <th class="min-width-90" md-column md-order-by="city.name">
+                    <span>
+                      محل اجرا
+                    </span>
+                  </th>
+                  <th class="min-width-200" md-column md-order-by="executor.name">
+                    <span>
+                      طرف قرارداد
+                    </span>
+                  </th>
+                  <th class="min-width-250" md-column md-order-by="general_rule">
+                    <span>
+                      شرایط عمومی
+                    </span>
+                  </th>
+                  <th class="min-width-90" md-column md-order-by="categoty">
+                    <span>
+                      طبقه‌بندی
+                    </span>
+                  </th>
+                  <th class="min-width-200" md-column md-order-by="credit_source">
+                    <span>
+                      منبع تامین اعتبار
+                    </span>
+                  </th>
+                  <th class="min-width-90" md-column md-order-by="id">
+                    <span>
+                      تاریخ ثبت
+                    </span>
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody md-body>
+                <tr md-row ng-class="{'pink':contract.error_displays.length > 0}" ng-repeat="contract in $ctrl.contracts.results | orderBy:$ctrl.contractsOrder ">
+                  <!-- <td md-cell>
+                    <a ui-sref="contract({'code':contract.code})">{{contract.code}}</a>
+                  </td> -->
+                  <td md-cell>
+                    <a ui-sref="contract({'code':contract.code})"> {{contract.title}}</a>
+                  </td>
+                  <td md-cell>{{contract.contract_date | moment | jalali | pNumber}}</td>
+                  <td md-cell>{{contract.end_date | moment | jalali | pNumber}}</td>
+                  <td md-cell>{{contract.duration | pNumber}} روز
+                  </td>
+                  <td md-cell>{{contract.price |pNumber | price}}
+                  </td>
+                  <td md-cell>
+                    <a ui-sref="list({'query':$root.encodeQuery({'city__town':contract.city.town.id,'city__town__province__id':contract.city.province.id,'city':contract.city.id})})">{{contract.city.name}}</a>
+                  </td>
+                  <td md-cell>
+                    <a ui-sref="executor({'id':contract.executor.id})"> {{contract.executor.name}}</a>
+                  </td>
+                  <td md-cell>{{contract.general_rule}}</td>
+                  <td md-cell>{{contract.category}}</td>
+                  <td md-cell>{{contract.credit_source}}</td>
+                  <td md-cell>{{contract.fetch_date | moment | jalali | pNumber}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </md-table-container>
+      </div>
+    </div>
+  </div>
+</section>

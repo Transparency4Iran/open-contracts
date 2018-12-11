@@ -1,0 +1,419 @@
+<!-- Banner -->
+<section id="carousel" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <ul class="carousel-indicators">
+    <li data-target="#carousel" data-slide-to="0" class="active"></li>
+    <li data-target="#carousel" data-slide-to="1"></li>
+    <li data-target="#carousel" data-slide-to="2"></li>
+    <li data-target="#carousel" data-slide-to="3"></li>
+  </ul>
+
+  <!-- The slideshow -->
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img class="img-fluid" src="../../app/images/slider-001.jpg" alt="شفافیت قراردادها - ۰۰۱">
+    </div>
+    <div class="carousel-item">
+      <img class="img-fluid" src="../../app/images/slider-002.jpg" alt="شفافیت قراردادها - ۰۰۲">
+    </div>
+    <div class="carousel-item">
+      <img class="img-fluid" src="../../app/images/slider-003.jpg" alt="شفافیت قراردادها - ۰۰۳">
+    </div>
+    <div class="carousel-item">
+      <img class="img-fluid" src="../../app/images/slider-004.jpg" alt="شفافیت قراردادها - ۰۰۴">
+    </div>
+  </div>
+
+  <!-- Left and right controls -->
+  <a class="carousel-control-prev" data-target="#carousel" data-slide="prev">
+    <span class="fa fa-angle-left"></span>
+  </a>
+  <a class="carousel-control-next" data-target="#carousel" data-slide="next">
+    <span class="fa fa-angle-right"></span>
+  </a>
+</section>
+
+<!-- About -->
+<section class="white padding-top-20 padding-bottom-40">
+  <div class="container">
+    <header class="text-center">
+      <h2 class="weight-500 margin-bottom-20 color-presianRed">شفافیت قراردادها؟</h2>
+    </header>
+
+    <div class="row">
+      <div class="col-md-7 col-sm-12">
+        <p class="text-justify margin-bottom-40">
+          شفافیت قراردادها یک خواسته و هدف تقریباً جدید است. کشورهای معدودی سیاست شفافیت قراردادها را در پیش گرفته و
+          تمام قراردادها
+          را به آسانی در دسترس مردم قرار می‌دهند. علاوه بر این، تعداد فزاینده‌ای از سازمان‌ها و موسسات خواستار شفافیت
+          قراردادها
+          هستند و در همین راستا کمپین‌های جهانی‌ای نیز ایجاد شده‌اند.
+        </p>
+
+        <div class="row justify-content-center">
+          <div class="col-lg col-md-4 col-sm-4 col-6 text-center">
+            <div class="contracts__box__icon">
+              <i class="fa fa-file-text-o fa-3x"></i>
+            </div>
+            <div id="contracts" class="contracts__box__detail counter">
+              <span count-from="0" count-to="{{stat.contracts_count}}" duration="5"></span>
+            </div>
+            <h4 class="contracts__box__title">
+              تعداد کل قراردادها
+            </h4>
+          </div>
+
+          <div class="col-lg col-md-4 col-sm-4 col-6 text-center">
+            <div class="contracts__box__icon">
+              <i class="fa fa-file-text fa-3x"></i>
+            </div>
+            <div id="with_error" class="contracts__box__detail counter">
+              <span count-from="0" count-to="{{stat.with_error_count}}" duration="5"></span>
+            </div>
+            <h4 class="contracts__box__title">
+              تعداد قراردادهای دارای خطا
+            </h4>
+          </div>
+
+          <div class="col-lg col-md-4 col-sm-4 col-6 text-center">
+            <div class="contracts__box__icon">
+              <i class="fa fa-bar-chart fa-3x"></i>
+            </div>
+            <div id="with_error_percent" class="contracts__box__detail counter">
+              {{(stat.with_error_count * 100 / stat.contracts_count) | number : 1 | pNumber}} %
+            </div>
+            <h4 class="contracts__box__title">
+              درصد قراردادهای دارای خطا
+            </h4>
+          </div>
+
+          <div class="col-lg col-md-4 col-sm-4 col-6 text-center">
+            <div class="contracts__box__icon">
+              <i class="fa fa-id-badge fa-3x"></i>
+            </div>
+            <div id="organizations" class="contracts__box__detail counter">
+              <span count-from="0" count-to="{{stat.organizations_count}}" duration="5"></span>
+            </div>
+            <h4 class="contracts__box__title">
+              تعداد کارفرمایان
+            </h4>
+          </div>
+
+          <div class="col-lg col-md-4 col-sm-4 col-6 text-center">
+            <div class="contracts__box__icon">
+              <i class="fa fa-address-book-o fa-3x"></i>
+            </div>
+            <div id="executors" class="contracts__box__detail counter">
+              <span count-from="0" count-to="{{stat.executors_count}}" duration="5"></span>
+            </div>
+            <h4 class="contracts__box__title">
+              تعداد کل مجریان
+            </h4>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-5 col-sm-12 text-center">
+        <img class="img-margin width-250" src="../../app/images/logo.png" alt="welcome">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why -->
+<section class="alternate padding-top-40 padding-bottom-40">
+  <div class="container">
+    <header class="text-center">
+      <h2 class="weight-500 margin-bottom-40 color-pelorous">چرا شفافیت قراردادها مهم است؟</h2>
+    </header>
+
+    <div class="row justify-content-center">
+      <div class="col-lg col-md-3 col-sm-6 col-12 text-center margin-bottom-10">
+        <div class="contracts__box__icon contracts__box__icon-red">
+          <i class="fa fa-user-secret fa-3x"></i>
+        </div>
+        <h4 class="contracts__box__title size-18">
+          فساد بالا
+        </h4>
+        <div class="contracts__box__detail">
+          گزینه‌ی اول در ریسک فساد دولتی؛ ۵۷ درصد موارد رشوه برای دریافت قرارداد دولتی اتفاق می‌افتد!
+        </div>
+      </div>
+
+      <div class="col-lg col-md-3 col-sm-6 col-12 text-center margin-bottom-10">
+        <div class="contracts__box__icon contracts__box__icon-red">
+          <i class="fa fa-diamond fa-3x"></i>
+        </div>
+        <h4 class="contracts__box__title size-18">
+          بسیار با ارزش
+        </h4>
+        <div class="contracts__box__detail">
+          ارزش کلی حدود ۹.۵۰۰ میلیارد دلاری قراردادهای بخش عمومی با خصوصی در سراسر دنیا
+        </div>
+      </div>
+
+      <div class="col-lg col-md-3 col-sm-6 col-12 text-center margin-bottom-10">
+        <div class="contracts__box__icon contracts__box__icon-red">
+          <i class="fa fa-user-circle fa-3x"></i>
+        </div>
+        <h4 class="contracts__box__title size-18">
+          کمک مردم
+        </h4>
+        <div class="contracts__box__detail">
+          کافی نبودن نظارت متمرکز و لزوم کمک گرفتن از مردم برای نظارت در این بخش
+        </div>
+      </div>
+
+      <div class="col-lg col-md-3 col-sm-6 col-12 text-center margin-bottom-10">
+        <div class="contracts__box__icon contracts__box__icon-red">
+          <i class="fa fa-line-chart fa-3x"></i>
+        </div>
+        <h4 class="contracts__box__title size-18">
+          رشد اقتصادی
+        </h4>
+        <div class="contracts__box__detail">
+          شرکت‌ها از فرصت‌های اقتصادی آگاه می‌شوند و شایسته‌ترین‌ها مشخص می‌شوند.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Charts -->
+<section class="white padding-top-40 padding-bottom-40">
+  <div class="container">
+    <header class="text-center">
+      <h2 class="weight-500 margin-bottom-20 color-limeGreen"><i class="fa fa-line-chart"></i> روند ثبت قراردادها در
+        ماه‌های اخیر</h2>
+    </header>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div id="attempts" class=""></div>
+      </div>
+    </div>
+
+    <header class="text-center">
+      <hr>
+      <h2 class="weight-500 margin-top-20 color-limeGreen"><i class="fa fa-bar-chart"></i> تعداد قراردادها</h2>
+    </header>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div id="dailyFetchPerTopOrganization" class=""></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Video -->
+<section class="alternate padding-top-40 padding-bottom-40">
+  <div class="container">
+    <header class="text-center">
+      <h2 class="weight-500 margin-bottom-40 color-ruby">شفاف سازی قراردادهای دولتی</h2>
+    </header>
+
+    <!-- <a data-fancybox data-src="#aparat__share" href="javascript:;">کلیک</a> -->
+
+    <div id="aparat__share" class="_aparat">
+      <style>
+        .h_iframe-aparat_embed_frame {
+          position: relative;
+        }
+
+        .h_iframe-aparat_embed_frame .ratio {
+          display: block;
+          width: 100%;
+          height: auto;
+        }
+
+        .h_iframe-aparat_embed_frame iframe {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+        }
+      </style>
+
+      <div class="h_iframe-aparat_embed_frame ratio-16-9">
+        <span style="display: block;padding-top: 57%"></span>
+        <iframe class="ratio-inner" src="https://www.aparat.com/video/video/embed/videohash/xdX8E/vt/frame"
+          allowFullScreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Goals -->
+<section class="white padding-top-40 padding-bottom-40">
+  <div class="container">
+    <header class="text-center">
+      <h2 class="weight-500 margin-bottom-20 color-endeavour">هدف از تأسیس این سامانه</h2>
+    </header>
+
+    <p class="text-center">در یک کلام:
+      <br>
+      <span class="weight-500 size-20">نمایش درست قراردادهای کشور</span>
+    </p>
+
+    <p class="text-justify">
+      <img class="img-fluid margin-left-10 margin-bottom-10" src="../../app/images/logo-nav.png" alt="Goals"> این
+      سامانه
+      اطلاعات خود را از
+      <a href="http://cdb.mporg.ir" target="_blank">پایگاه اطلاعات قراردادهای کل کشور</a>
+      دریافت می‌کند. با مرور چند ثانیه‌ای سامانه‌ی مذکور متوجه انبوه اشکالات در ثبت قراردادهای کشور خواهید شد و در
+      نهایت به این
+      نتیجه می‌رسید که ای کاش سامانه‌ی بهتری بود. برخی از اشکالات این سامانه:
+    </p>
+
+    <div class="row justify-content-center">
+      <div class="col-lg col-md-3 col-sm-6 col-12 text-center align-self-center margin-bottom-10">
+        <h4 class="contracts__box__detail">
+          نام طرف قرارداد در صفحه‌ی فهرست قرارداد آمده است و در صفحه‌ی قرارداد طرف قرارداد ذکر نشده است!
+        </h4>
+      </div>
+
+      <div class="col-lg col-md-3 col-sm-6 col-12 text-center align-self-center margin-bottom-10">
+        <h4 class="contracts__box__detail">
+          مدت برخی قراردادها ۱۳۹۷ سال ذکر شده‌اند!!
+        </h4>
+      </div>
+
+      <div class="col-lg col-md-3 col-sm-6 col-12 text-center align-self-center margin-bottom-10">
+        <h4 class="contracts__box__detail">
+          بسیاری از قراردادها محل اجرا ندارند!
+        </h4>
+      </div>
+
+      <div class="col-lg col-md-3 col-sm-6 col-12 text-center align-self-center margin-bottom-10">
+        <h4 class="contracts__box__detail">
+          و انبوهی از اشکالات دیگر
+        </h4>
+      </div>
+    </div>
+
+    <a class="btn btn-primary btn-lg pull-left" href="http://blog.tp4.ir/post/709" target="_blank">اطلاعات بیشتر</a>
+  </div>
+</section>
+
+<!-- World -->
+<section>
+  <div class="row box-gradient box-blue">
+    <div class="col-6 col-md-3">
+      <a class="block" href="https://www.open-contracting.org/why-open-contracting/showcase-projects/ukraine" target="_blank">
+        <img src="../../app/images/UA.png" class="width-64 img-margin" alt="اکراین">
+        <h2 class="size-20">اکراین</h2>
+      </a>
+    </div>
+
+    <div class="col-6 col-md-3">
+      <a class="block" href="http://blog.tp4.ir/post/178" target="_blank">
+        <img src="../../app/images/NG.png" class="width-64 img-margin" alt="نیجریه">
+        <h2 class="size-20">نیجریه</h2>
+      </a>
+    </div>
+
+    <div class="col-6 col-md-3">
+      <a class="block" href="http://blog.tp4.ir/post/512" target="_blank">
+        <img src="../../app/images/SK.png" class="width-64 img-margin" alt="اسلواکی">
+        <h2 class="size-20">اسلواکی</h2>
+      </a>
+    </div>
+
+    <div class="col-6 col-md-3">
+      <i class="fa fa-question-circle-o fa-2x"></i>
+      <h2 class="size-20">
+        <a href="" target="_blank">راهنمای باز کردن قراردادها</a>
+      </h2>
+    </div>
+  </div>
+</section>
+
+<!-- Clinets -->
+<section class="white padding-top-40 padding-bottom-40">
+  <div class="container">
+    <header class="text-center">
+      <h2 class="weight-500 margin-bottom-20 color-tangerian">حامیان</h2>
+    </header>
+
+    <div class="row clients-dotted justify-content-center">
+      <div class="col-md-4 col-sm-4 col-6 text-center">
+        <a class="block" href="http://blog.tp4.ir/" target="_blank">
+          <img class="img-fluid width-150" src="../../app/images/t4iran.jpg" alt="">
+        </a>
+        <h4 class="margin-top-10 size-18 weight-500">
+          شفافیت برای ایران
+        </h4>
+      </div>
+
+      <div class="col-md-4 col-sm-4 col-6 text-center">
+        <a class="block" href="http://www.payeshtv.ir/" target="_blank">
+          <img class="img-fluid width-150" src="../../app/images/payesh.jpg" alt="">
+        </a>
+        <h4 class="margin-top-10 size-18 weight-500">
+          پایش
+        </h4>
+      </div>
+
+      <div class="col-md-4 col-sm-4 col-6 text-center">
+        <a class="block" href="http://daad.ir/" target="_blank">
+          <img class="img-fluid width-150" src="../../app/images/daad.jpg" alt="">
+        </a>
+        <h4 class="margin-top-10 size-18 weight-500">
+          سمن دیده‌بان شفافیت و عدالت
+        </h4>
+      </div>
+    </div>
+</section>
+
+<!-- Contact -->
+<section class="parallax padding-top-40 padding-bottom-40">
+  <div class="overlay"></div>
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="text-center">
+        <h3 class="size-30">ارتباط با ما</h3>
+        <p class="">این سامانه و انبوهی ایده برای سامانه‌های دیگر با مشارکت شما تکمیل خواهند شد.
+          در انجمن شفافیت برای ایران منتظر نظرات گرم و دوستانه‌ی شما هستیم.
+        </p>
+        <a class="btn btn-secondary btn-lg size-20" href="https://discuss.tp4.ir/" target="_blank">ورود به انجمن</a>
+      </div>
+
+      <div class="row justify-content-between social-icons text-center">
+        <div class="col-xs-6 col-sm-3 col-md-3">
+          <a target="_blank" href="https://t.me/tp4_ir">
+            <i class="fa fa-telegram"></i>
+            <h4></h4>
+            <span>به کانال ما بپیوندید</span>
+          </a>
+        </div>
+
+        <div class="col-xs-6 col-sm-3 col-md-3">
+          <a target="_blank" href="https://instagram.com/tp4.ir">
+            <i class="fa fa-instagram"></i>
+            <h4></h4>
+            <span>عکس‌های ما را ببینید</span>
+          </a>
+        </div>
+
+        <div class="col-xs-6 col-sm-3 col-md-3">
+          <a target="_blank" href="https://twitter.com/tp4_ir">
+            <i class="fa fa-twitter"></i>
+            <h4></h4>
+            <span>ما را دنبال کنید</span>
+          </a>
+        </div>
+
+        <div class="col-xs-6 col-sm-3 col-md-3">
+          <a target="_blank" href="https://ble.im/tp4_ir">
+            <i class="fa fa-check-circle"></i>
+            <h4></h4>
+            <span>کانال ما در بله</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

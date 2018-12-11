@@ -1,0 +1,13 @@
+*~
+media/
+static/
+uf.sh
+ub.sh
+*.DS_Store
+uwsgi.ini
+8000
+r.txt
+dump.rdb
+venv/
+dist/
+node_modules/

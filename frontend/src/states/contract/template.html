@@ -1,0 +1,357 @@
+<section class="white padding-top-20 padding-bottom-20">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <header class="">
+          <h2 class="weight-500 margin-bottom-20 color-limeGreen">جزئیات قرارداد</h2>
+        </header>
+      </div>
+
+      <div class="col-sm-12">
+        <hr />
+      </div>
+
+      <div class="col-sm-12">
+        <div class="row height-3 align-items-center">
+          <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
+            <div class="size-13 weight-500">
+              عنوان قرارداد:
+            </div>
+          </div>
+          <div class="col-lg-10 col-md-9 col-sm-8 col-xs-12">
+            <div class="size-13">
+              {{$ctrl.contract.title}}
+            </div>
+          </div>
+
+          <div class="col-sm-12">
+            <hr />
+          </div>
+        </div>
+
+        <div class="row height-40 align-items-center">
+          <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
+            <div class="size-13 weight-500">
+              کارفرما:
+            </div>
+          </div>
+          <div class="col-lg-10 col-md-9 col-sm-8 col-xs-12">
+            <div class="size-13">
+              <span ng-repeat="organization in $ctrl.contract.organizations"><span ng-if="$index != 0">/</span><a
+                  ui-sref="organization({'id':organization.id})"> {{organization.display_name}}</a></span>
+            </div>
+          </div>
+
+          <div class="col-sm-12">
+            <hr />
+          </div>
+        </div>
+
+        <div class="row height-40 align-items-center">
+          <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
+            <div class="size-13 weight-500">
+              طرف قرارداد:
+            </div>
+          </div>
+          <div class="col-lg-10 col-md-9 col-sm-8 col-xs-12">
+            <div class="size-13">
+              <a ui-sref="executor({'id':$ctrl.contract.executor.id})"> {{$ctrl.contract.executor.name}}</a>
+            </div>
+          </div>
+
+          <div class="col-sm-12">
+            <hr />
+          </div>
+        </div>
+
+        <div class="row height-40 align-items-center">
+          <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
+            <div class="size-13 weight-500">
+              تاریخ انعقاد انعقاد:
+            </div>
+          </div>
+          <div class="col-lg-10 col-md-9 col-sm-8 col-xs-12">
+            <div class="size-13">
+              {{$ctrl.contract.contract_date | moment | jalali | pNumber}}
+            </div>
+          </div>
+
+          <div class="col-sm-12">
+            <hr />
+          </div>
+        </div>
+
+        <div class="row height-40 align-items-center">
+          <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
+            <div class="size-13 weight-500">
+              تاریخ خاتمه قرارداد:
+            </div>
+          </div>
+          <div class="col-lg-10 col-md-9 col-sm-8 col-xs-12">
+            <div class="size-13">
+              {{$ctrl.contract.end_date | moment | jalali | pNumber}}
+            </div>
+          </div>
+
+          <div class="col-sm-12">
+            <hr />
+          </div>
+        </div>
+
+        <div class="row height-40 align-items-center">
+          <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
+            <div class="size-13 weight-500">
+              مهلت:
+            </div>
+          </div>
+          <div class="col-lg-10 col-md-9 col-sm-8 col-xs-12">
+            <div class="size-13">
+              {{$ctrl.contract.contract_date | dateDiff:$ctrl.contract.end_date | pNumber}} معادل
+              {{$ctrl.contract.duration | pNumber}} روز
+            </div>
+          </div>
+
+          <div class="col-sm-12">
+            <hr />
+          </div>
+        </div>
+
+        <div class="row height-40 align-items-center">
+          <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
+            <div class="size-13 weight-500">
+              تاریخ ثبت در سامانه:
+            </div>
+          </div>
+          <div class="col-lg-10 col-md-9 col-sm-8 col-xs-12">
+            <div class="size-13">
+              {{$ctrl.contract.fetch_date | moment | jalali | pNumber}}
+            </div>
+          </div>
+
+          <div class="col-sm-12">
+            <hr />
+          </div>
+        </div>
+
+        <div class="row height-40 align-items-center">
+          <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
+            <div class="size-13 weight-500">
+              مدت تأخیر در ثبت:
+            </div>
+          </div>
+          <div class="col-lg-10 col-md-9 col-sm-8 col-xs-12">
+            <div class="size-13">
+              {{$ctrl.contract.delay | pNumber}} روز
+            </div>
+          </div>
+
+          <div class="col-sm-12">
+            <hr />
+          </div>
+        </div>
+
+        <div class="row height-40 align-items-center">
+          <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
+            <div class="size-13 weight-500">
+              مبلغ:
+            </div>
+          </div>
+          <div class="col-lg-10 col-md-9 col-sm-8 col-xs-12">
+            <div class="size-13">
+              {{$ctrl.contract.price | pNumber | price}} ریال
+            </div>
+          </div>
+
+          <div class="col-sm-12">
+            <hr />
+          </div>
+        </div>
+
+        <div class="row height-40 align-items-center">
+          <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
+            <div class="size-13 weight-500">
+              محل اجرا:
+            </div>
+          </div>
+          <div class="col-lg-10 col-md-9 col-sm-8 col-xs-12">
+            <div class="size-13">
+              <span ng-if="$ctrl.contract.city"><a ui-sref="list({'query':$root.encodeQuery({'city__town__province__id':$ctrl.contract.city.province.id})})">{{$ctrl.contract.city.province.name}}</a>
+                / <a ui-sref="list({'query':$root.encodeQuery({'city__town':$ctrl.contract.city.town.id,'city__town__province__id':$ctrl.contract.city.province.id})})">{{$ctrl.contract.city.town.name}}</a>
+                / <a ui-sref="list({'query':$root.encodeQuery({'city__town':$ctrl.contract.city.town.id,'city__town__province__id':$ctrl.contract.city.province.id,'city':$ctrl.contract.city.id})})">{{$ctrl.contract.city.name}}</a></span><span
+                ng-if="$ctrl.contract.city == null">محل اجرا ندارد.</span>
+            </div>
+          </div>
+
+          <div class="col-sm-12">
+            <hr />
+          </div>
+        </div>
+
+        <div class="row height-40 align-items-center">
+          <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
+            <div class="size-13 weight-500">
+              شرایط عمومی قرارداد:
+            </div>
+          </div>
+          <div class="col-lg-10 col-md-9 col-sm-8 col-xs-12">
+            <div class="size-13">
+              {{$ctrl.contract.general_rule}}
+            </div>
+          </div>
+
+          <div class="col-sm-12">
+            <hr />
+          </div>
+        </div>
+
+        <div class="row height-40 align-items-center">
+          <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
+            <div class="size-13 weight-500">
+              منبع تامین اعتبار:
+            </div>
+          </div>
+          <div class="col-lg-10 col-md-9 col-sm-8 col-xs-12">
+            <div class="size-13">
+              {{$ctrl.contract.credit_source}}
+            </div>
+          </div>
+
+          <div class="col-sm-12">
+            <hr />
+          </div>
+        </div>
+
+        <div class="row height-40 align-items-center">
+          <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
+            <div class="size-13 weight-500">
+              طبقه‌بندی:
+            </div>
+          </div>
+          <div class="col-lg-10 col-md-9 col-sm-8 col-xs-12">
+            <div class="size-13">
+              {{$ctrl.contract.category}}
+            </div>
+          </div>
+
+          <div class="col-sm-12">
+            <hr />
+          </div>
+        </div>
+
+        <div class="row height-40 align-items-center">
+          <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
+            <div class="size-13 weight-500">
+              کد قرارداد:
+            </div>
+          </div>
+          <div class="col-lg-10 col-md-9 col-sm-8 col-xs-12">
+            <div class="size-13">
+              {{$ctrl.contract.code}}
+            </div>
+          </div>
+
+          <div class="col-sm-12">
+            <hr />
+          </div>
+        </div>
+
+        <div class="row height-40 align-items-center">
+          <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
+            <div class="size-13 weight-500">
+              ثبت‌کننده قرارداد:
+            </div>
+          </div>
+          <div class="col-lg-10 col-md-9 col-sm-8 col-xs-12">
+            <div class="size-13">
+              <a ui-sref="list({'query':$root.encodeQuery({'registrar__id':$ctrl.contract.registrar.id})})">{{$ctrl.contract.registrar.display_name}}</a>
+            </div>
+          </div>
+
+          <div class="col-sm-12">
+            <hr />
+          </div>
+        </div>
+
+        <div class="row height-40 align-items-center">
+          <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
+            <div class="size-13 weight-500">
+              خطاها:
+            </div>
+          </div>
+          <div class="col-lg-10 col-md-9 col-sm-8 col-xs-12">
+            <div class="size-13">
+              <span ng-repeat="error in $ctrl.contract.error_displays"><span ng-if="$index != 0">,</span>{{error}}</span>
+            </div>
+          </div>
+
+          <div class="col-sm-12">
+            <hr />
+          </div>
+        </div>
+
+        <div class="row height-40 align-items-center">
+          <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
+            <div class="size-13 weight-500">
+              لینک cdb:
+            </div>
+          </div>
+          <div class="col-lg-10 col-md-9 col-sm-8 col-xs-12">
+            <div class="size-13">
+              <span>ابتدا روی</span><a href="http://cdb.mporg.ir/">این لینک</a><span>و سپس روی</span><a href="{{$ctrl.contract.link}}">این
+                لینک</a>کلیک کنید.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-12 margin-top-20 margin-bottom-20">
+        <div class="row color-white bgColor-presianRed height-40 margin-bottom-3 align-items-center">
+          <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
+            <div class="size-13 weight-500">
+              شرح خدمات
+            </div>
+          </div>
+          <div class="col-lg-10 col-md-9 col-sm-8 col-xs-12">
+            <div class="size-13">
+              &nbsp;
+            </div>
+          </div>
+        </div>
+
+        <div class="row color-white bgColor-presianRed height-40 margin-bottom-3 align-items-center">
+          <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
+            <div class="size-13 weight-500">
+              آگهی مزایده / مناقصه
+            </div>
+          </div>
+          <div class="col-lg-10 col-md-9 col-sm-8 col-xs-12">
+            <div class="size-13">
+              &nbsp;
+            </div>
+          </div>
+        </div>
+
+        <div class="row color-white bgColor-presianRed height-40 margin-bottom-3 align-items-center">
+          <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
+            <div class="size-13 weight-500">
+              RFP
+            </div>
+          </div>
+          <div class="col-lg-10 col-md-9 col-sm-8 col-xs-12">
+            <div class="size-13">
+              &nbsp;
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-12">
+        <header class="">
+          <h2 class="weight-500 margin-bottom-20 color-limeGreen">تعداد قرارداد</h2>
+        </header>
+
+        <div class="percentile_chart"></div>
+      </div>
+    </div>
+  </div>
+</section>

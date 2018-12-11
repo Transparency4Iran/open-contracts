@@ -1,0 +1,363 @@
+<style>
+  @media (min-width: 960px) {
+    .col-lg-3 {
+      padding-left: 5px;
+    }
+
+    .col-lg-9 {
+      padding-right: 5px;
+    }
+  }
+</style>
+
+<section class="alternate padding-top-20 padding-bottom-20">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-3">
+        <div class="card">
+          <div class="card-body">
+            <header class="text-right">
+              <h2 class="size-18 weight-500 margin-bottom-20 color-limeGreen"><i class="fa fa-filter"></i> فیلترها</h2>
+              </h2>
+            </header>
+
+            <div class="scrollbar" style="height: calc(100vh - 276px)">
+              <div class="col-sm-12">
+                <md-autocomplete class="width-full" md-selected-item="selectedExecutor" md-search-text="query.executor__name__contains"
+                  md-items="item in searchForExecutors(query.executor__name__contains)" md-item-text="item.name"
+                  md-min-length="0" md-floating-label="نام طرف قرارداد شامل">
+                  <md-item-template>
+                    <span md-highlight-text="query.executor__name__contains" md-highlight-flags="^i">{{item.name}}</span>
+                  </md-item-template>
+                  <md-not-found>
+                    مجری با نام شامل "{{query.executor__name__contains}}" یافت نشد
+                  </md-not-found>
+                </md-autocomplete>
+              </div>
+
+              <div class="col-sm-12">
+                <md-input-container class="width-full">
+                  <label class="contract__filter__label">استان</label>
+                  <md-select id="province__id" ng-model="query.city__town__province__id" ng-change="changeProvince()">
+                    <md-option class="contracts__filter__option" value="">همه</md-option>
+                    <md-option class="contracts__filter__option" ng-value="x.id" ng-repeat="x in provinces | orderBy:'name'">{{
+                      x.name }}</md-option>
+                  </md-select>
+                </md-input-container>
+
+                <md-input-container class="width-full" ng-if="towns">
+                  <label class="contract__filter__label">شهرستان</label>
+                  <md-select id="town__id" ng-model="query.city__town" ng-change="changeTown()">
+                    <md-option class="contracts__filter__option" value>همه</md-option>
+                    <md-option class="contracts__filter__option" ng-value="x.id" ng-repeat="x in towns | orderBy:'name'">{{
+                      x.name }}</md-option>
+                  </md-select>
+                </md-input-container>
+
+                <md-input-container class="width-full" ng-if="cities">
+                  <label class="contract__filter__label">شهر</label>
+                  <md-select id="city__id" ng-model="query.city">
+                    <md-option class="contracts__filter__option">همه</md-option>
+                    <md-option class="contracts__filter__option" ng-value="x.id" ng-repeat="x in cities | orderBy:'name'">{{
+                      x.name }}</md-option>
+                  </md-select>
+                </md-input-container>
+              </div>
+
+              <div class="col-sm-12">
+                <md-input-container class="width-full">
+                  <label class="contract__filter__label">سازمان بالایی</label>
+                  <md-select id="top" ng-model="query.top_organization" ng-change="changeTopOrganization()">
+                    <md-option class="contracts__filter__option" value="">همه</md-option>
+                    <md-option class="contracts__filter__option" ng-value="x.id" ng-repeat="x in topOrganizations | orderBy:'display_name'">{{
+                      x.display_name }}</md-option>
+                  </md-select>
+                </md-input-container>
+
+                <md-input-container class="width-full" ng-if="leaves">
+                  <label class="contract__filter__label">کارفرما</label>
+                  <md-select id="town__id" ng-model="query.organization">
+                    <md-option class="contracts__filter__option" value="all">همه</md-option>
+                    <md-option class="contracts__filter__option" ng-value="x.id" ng-repeat="x in leaves | orderBy:'displayPath'">{{
+                      x.displayPath }}</md-option>
+                  </md-select>
+                </md-input-container>
+              </div>
+
+              <div class="col-sm-12">
+                <md-input-container class="width-full">
+                  <label class="contract__filter__label">عنوان شامل</label>
+                  <input id="title__contains" ng-model="query.title__contains">
+                </md-input-container>
+
+                <md-input-container class="width-full">
+                  <label class="contract__filter__label">شرایط عمومی قرارداد</label>
+                  <md-select id="general_rule__id" ng-model="query.general_rule__id">
+                    <md-option class="contracts__filter__option" value="">همه</md-option>
+                    <md-option class="contracts__filter__option" ng-value="x.id" ng-repeat="x in generalRules | orderBy:'title'">{{
+                      x.title }}</md-option>
+                  </md-select>
+                </md-input-container>
+              </div>
+
+              <div class="col-sm-12">
+                <md-input-container class="width-full">
+                  <label class="contract__filter__label">طبقه‌بندی</label>
+                  <md-select id="category__id" ng-model="query.category__id">
+                    <md-option class="contracts__filter__option" value="">همه</md-option>
+                    <md-option class="contracts__filter__option" ng-value="x.id" ng-repeat="x in categories | orderBy:'title'">{{
+                      x.title }}</md-option>
+                  </md-select>
+                </md-input-container>
+
+                <md-input-container class="width-full">
+                  <label class="contract__filter__label">منبع تامین اعتبار</label>
+                  <md-select id="credit_source__id" ng-model="query.credit_source__idcategory__id">
+                    <md-option class="contracts__filter__option" value="">همه</md-option>
+                    <md-option class="contracts__filter__option" ng-value="x.id" ng-repeat="x in creditSources | orderBy:'title'">{{
+                      x.title }}</md-option>
+                  </md-select>
+                </md-input-container>
+              </div>
+
+              <div class="col-sm-12">
+                <md-input-container class="width-full">
+                  <label class="contract__filter__label"> مبلغ از:</label>
+                  <input id="price__gte" ng-model="query.price__gte">
+                  <div class="size-14 weight-500">{{query.price__gte | pNumber | price}}
+                    <span ng-show="query.price__gte">
+                      تومان
+                    </span>
+                  </div>
+                </md-input-container>
+
+                <md-input-container class="width-full">
+                  <label class="contract__filter__label"> تا:</label>
+                  <input id="price__lte" ng-model="query.price__lte">
+                  <div class="size-14 weight-500">{{query.price__lte | pNumber | price}}
+                    <span ng-show="query.price__lte">
+                      تومان
+                    </span>
+                  </div>
+                </md-input-container>
+              </div>
+
+              <div class="col-sm-12">
+                <md-input-container class="width-full">
+                  <label class="contract__filter__label">تاریخ قرارداد از:</label>
+                  <adm-dtp id="start_contract_date" ng-model='start_contract_date' options='{calType: "jalali", format: "YYYY/MM/DD", dtpType:"date", autoClose:true}'></adm-dtp>
+                </md-input-container>
+
+                <md-input-container class="width-full">
+                  <label class="contract__filter__label"> تا:</label>
+                  <adm-dtp id="end_contract_date" ng-model='end_contract_date' options='{calType: "jalali", format: "YYYY/MM/DD", dtpType:"date", autoClose:true}'></adm-dtp>
+                </md-input-container>
+              </div>
+
+              <div class="col-sm-12">
+                <md-input-container class="width-full">
+                  <label class="contract__filter__label">تاریخ خاتمه قرارداد از:</label>
+                  <adm-dtp id="start_end_date" ng-model='start_end_date' options='{calType: "jalali", format: "YYYY/MM/DD", dtpType:"date", autoClose:true}'></adm-dtp>
+                </md-input-container>
+
+                <md-input-container class="width-full">
+                  <label class="contract__filter__label"> تا:</label>
+                  <adm-dtp id="end_end_date" ng-model='end_end_date' options='{calType: "jalali", format: "YYYY/MM/DD", dtpType:"date", autoClose:true}'></adm-dtp>
+                </md-input-container>
+              </div>
+
+              <div class="col-sm-12">
+                <md-input-container class="width-full">
+                  <label class="contract__filter__label">مهلت از:</label>
+                  <input id="duration__gte" ng-model="query.duration__gte">
+                </md-input-container>
+
+                <md-input-container class="width-full">
+                  <label class="contract__filter__label">روز تا:</label>
+                  <input id="duration__lte" ng-model="query.duration__lte">
+                </md-input-container>
+              </div>
+
+              <div class="col-sm-12">
+                <md-input-container class="width-full">
+                  <label class="contract__filter__label">ثبت‌کننده قرارداد:</label>
+                  <md-select id="registrar__id" ng-model="query.registrar__idcategory__id">
+                    <md-option class="contracts__filter__option" value="">همه</md-option>
+                    <md-option class="contracts__filter__option" ng-value="x.id" ng-repeat="x in registrars | orderBy:'display_name'">{{
+                      x.display_name }}</md-option>
+                  </md-select>
+                </md-input-container>
+
+                <md-input-container class="width-full">
+                  <label class="contract__filter__label">وضعیت خطا:</label>
+                  <md-select id="errorStatus" ng-model="errorStatus">
+                    <md-option class="contracts__filter__option" value="all">نمایش همه</md-option>
+                    <md-option class="contracts__filter__option" value="ok">بی خطا</md-option>
+                    <md-option class="contracts__filter__option" value="nok">با خطا</md-option>
+                    <md-option class="contracts__filter__option" value="select">انتخاب نوع خطا</md-option>
+                  </md-select>
+                </md-input-container>
+              </div>
+
+              <div class="col-sm-12" ng-show="errorStatus=='select'">
+                <label for="errors">
+                  خطاها :
+                </label>
+                <span id="errors">
+                  <select multiple ng-model="selectedErrors">
+                    <option ng-repeat="error in allErrors" value="{{$index}}">{{error}}</option>
+                  </select>
+                </span>
+              </div>
+
+              <div class="col-sm-12">
+                <md-button class="btn btn-block btn-success" ng-click="query.page=1;change()">نمایش</md-button>
+                <md-button class="btn btn-block btn-primary" ng-click="exportExcel()">خروجی اکسل از داده‌های در حال
+                  نمایش</md-button>
+                <md-button class="btn btn-block btn-warning" ng-click="copyURL()">کپی لینک</md-button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-9">
+        <div class="card">
+          <div class="card-body">
+            <header class="text-right">
+              <h2 class="size-18 weight-500 margin-bottom-20 color-limeGreen"><i class="fa fa-list"></i> نمایش جزئیات</h2>
+              </h2>
+            </header>
+
+            <md-table-container>
+              <div class="scrollbar" style="height: calc(100vh - 335px)">
+                <table resize md-table md-progress="promise">
+                  <thead md-head md-order="query.ordering" md-on-reorder="change">
+                    <tr md-row>
+                      <!-- <th md-column md-order-by="code">
+                        <span>
+                          کد قرارداد
+                        </span>
+                      </th> -->
+                      <th class="min-width-250" md-column md-order-by="organizations[0].display_name">
+                        <span>
+                          کارفرما
+                        </span>
+                      </th>
+                      <th class="min-width-200" md-column md-order-by="title">
+                        <span>
+                          عنوان
+                        </span>
+                      </th>
+                      <th md-column md-order-by="contract_date">
+                        <span>
+                          تاریخ قرارداد
+                        </span>
+                      </th>
+                      <th md-column md-order-by="end_date">
+                        <span>
+                          تاریخ خاتمه
+                        </span>
+                      </th>
+                      <th md-column md-order-by="duration">
+                        <span>
+                          مهلت
+                        </span>
+                      </th>
+                      <th md-column md-order-by="price">
+                        <span>
+                          مبلغ(تومان)
+                        </span>
+                      </th>
+                      <th md-column md-order-by="city.name">
+                        <span>
+                          محل اجرا
+                        </span>
+                      </th>
+                      <th class="min-width-150" md-column md-order-by="executor.name">
+                        <span>
+                          طرف قرارداد
+                        </span>
+                      </th>
+                      <th class="min-width-200" md-column md-order-by="general_rule">
+                        <span>
+                          شرایط عمومی
+                        </span>
+                      </th>
+                      <th md-column md-order-by="categoty">
+                        <span>
+                          طبقه‌بندی
+                        </span>
+                      </th>
+                      <th class="min-width-200" md-column md-order-by="credit_source">
+                        <span>
+                          منبع تامین اعتبار
+                        </span>
+                      </th>
+                      <th md-column md-order-by="id">
+                        <span>
+                          تاریخ ثبت
+                        </span>
+                      </th>
+                    </tr>
+                  </thead>
+
+                  <tbody md-body>
+                    <tr md-row ng-class="{'red':contract.error_displays.length > 0}" ng-repeat="contract in resp.results">
+                      <!-- <td md-cell>
+                        <a ui-sref="contract({'code':contract.code})">{{contract.code}}</a>
+                      </td> -->
+
+                      <td md-cell>
+                        <span class="organization-color" ng-repeat="organization in contract.organizations">
+                          <span ng-if="$index != 0">، </span>
+                          <a ui-sref="organization({'id':organization.id})">
+                            {{organization.display_name}}
+                          </a>
+                        </span>
+                      </td>
+
+                      <td md-cell>
+                        <a class="contract__title-color" ui-sref="contract({'code':contract.code})"> {{contract.title}}</a>
+                      </td>
+
+                      <td md-cell>{{contract.contract_date | moment | jalali | pNumber}}</td>
+
+                      <td md-cell>{{contract.end_date | moment | jalali | pNumber}}</td>
+
+                      <td md-cell>{{contract.duration | pNumber}} روز
+                      </td>
+
+                      <td md-cell>{{contract.price/10 | pNumber | price}}
+                      </td>
+
+                      <td md-cell>
+                        <a class="city__town-color" ui-sref="list({'query':$root.encodeQuery({'city__town':contract.city.town.id,'city__town__province__id':contract.city.province.id,'city':contract.city.id})})">{{contract.city.name}}</a>
+                      </td>
+
+                      <td md-cell>
+                        <a class="executor-color" ui-sref="executor({'id':contract.executor.id})">
+                          {{contract.executor.name}}</a>
+                      </td>
+
+                      <td md-cell>{{contract.general_rule}}</td>
+
+                      <td md-cell>{{contract.category}}</td>
+
+                      <td md-cell>{{contract.credit_source}}</td>
+
+                      <td md-cell>{{contract.fetch_date | moment | jalali | pNumber}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </md-table-container>
+
+            <md-table-pagination md-limit="query.limit" md-limit-options="[5,10,20,50,100,1000]" md-page="query.page"
+              md-total="{{resp.count}}" md-on-paginate="change" md-label="{page: 'صفحه', rowsPerPage: 'تعداد در هر صفحه', of: 'از'}"
+              md-page-select></md-table-pagination>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>

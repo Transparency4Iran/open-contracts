@@ -1,0 +1,198 @@
+<section class="white padding-top-20">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-3 col-md-4 col-sm-12 nomargin">
+        <header class="text-right">
+          <h3 class="size-18 weight-500 margin-bottom-10 color-limeGreen"><i class="fa fa-search"></i> جستجوی نام مجری</h2>
+          </h3>
+        </header>
+      </div>
+
+      <div class="col-lg-6 col-md-5 col-sm-12 nomargin">
+        <md-input-container class="width-full">
+          <label class="contract__filter__label" for="name__contains">عنوان شامل</label>
+          <input id="name__contains" ng-model="$ctrl.query.name__contains">
+        </md-input-container>
+      </div>
+
+      <div class="col-lg-3 col-md-3 col-sm-12 nomargin">
+        <button class="btn btn-block btn-success btn-lg nomargin noradius" ng-click="$ctrl.change()">جستجو</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <hr>
+  </div>
+</section>
+
+<section class="white">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-sm-12 margin-bottom-10">
+        <header class="text-right">
+          <h3 class="size-18 weight-500 margin-bottom-10 color-limeGreen"><i class="fa fa-table"></i> جدول مجریان</h3>
+        </header>
+
+        <md-table-container>
+          <div class="scrollbar" style="height: calc(100vh - 350px)">
+            <table md-table md-progress="$ctrl.promise">
+              <thead md-head md-order="$ctrl.query.ordering" md-on-reorder="$ctrl.change">
+                <tr md-row>
+                  <th md-column md-order-by="name">
+                    <span>
+                      نام مجری
+                    </span>
+                  </th>
+                  <th md-column md-order-by="count">
+                    <span>
+                      تعداد قرارداد
+                    </span>
+                  </th>
+                  <th md-column md-order-by="sum">
+                    <span>
+                      مجموع مبالغ قراردادها
+                    </span>
+                  </th>
+                  <th md-column>
+                    <span>
+                      سازمان‌های همکار
+                    </span>
+                  </th>
+                  <th md-column>
+                    <span>
+                      استان‌های محل فعالیت
+                    </span>
+                  </th>
+
+                </tr>
+              </thead>
+
+              <tbody md-body>
+                <tr md-row ng-repeat="executor in $ctrl.resp.results">
+                  <td md-cell>
+                    <a ui-sref="executor({'id':executor.id})">{{executor.name}}</a>
+                  </td>
+                  <td md-cell>{{executor.count| pNumber}}</td>
+                  <td md-cell>{{executor.sum |pNumber | price}}</td>
+                  <td md-cell>
+                    <span class="organization-color" ng-repeat="organization in executor.top_organizations">
+                      <span ng-if="$index != 0">، </span>
+                      <a ui-sref="organization({'id':organization.id})">
+                        {{organization.display_name}}
+                      </a>
+                    </span>
+                  </td>
+                  <td md-cell>
+                    <span class="province-color" ng-repeat="province in executor.provinces">
+                      <span ng-if="$index != 0">، </span>
+                      <a ui-sref="list({'query':$root.encodeQuery({'city__town__province__id':province.id})})">
+                        {{province.name}}
+                      </a>
+                    </span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </md-table-container>
+
+        <md-table-pagination md-limit="$ctrl.query.limit" md-limit-options="[5,10,20,50,100,1000,100000]" md-page="$ctrl.query.page"
+          md-total="{{$ctrl.resp.count}}" md-on-paginate="$ctrl.change" md-label="{page: 'صفحه', rowsPerPage: 'تعداد در هر صفحه', of: 'از'}"
+          md-page-select>
+        </md-table-pagination>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- <div layout="row" layout-sm="column" layout-xs="column">
+  <md-card flex="20" flex-sm="100" flex-xs="100">
+    <md-card-content>
+      <h2 class="contrants__title margin-top-0 margin-bottom-0">
+        <i class="fa fa-search"></i> جستجوی نام مجری</h2>
+
+      <div layout="column">
+        <md-input-container flex="100">
+          <label class="contract__filter__label" for="name__contains">عنوان شامل</label>
+          <input id="name__contains" ng-model="$ctrl.query.name__contains">
+        </md-input-container>
+      </div>
+      <input ng-model="$ctrl.query.name__contains" placeholder="جستجو با نام مجری">
+
+      <section layout="column">
+        <md-button flex="100" class="md-raised md-success" ng-click="$ctrl.change()">جستجو</md-button>
+      </section>
+    </md-card-content>
+  </md-card>
+
+  <md-card flex="80" flex-sm="100" flex-xs="100">
+    <md-card-content>
+      <md-table-container>
+        <table md-table md-progress="$ctrl.promise">
+          <thead md-head md-order="$ctrl.query.ordering" md-on-reorder="$ctrl.change">
+            <tr md-row>
+              <th md-column md-order-by="name">
+                <span>
+                  نام مجری
+                </span>
+              </th>
+              <th md-column md-order-by="count">
+                <span>
+                  تعداد قرارداد
+                </span>
+              </th>
+              <th md-column md-order-by="sum">
+                <span>
+                  مجموع مبالغ قراردادها
+                </span>
+              </th>
+              <th md-column>
+                <span>
+                  سازمان‌های همکار
+                </span>
+              </th>
+              <th md-column>
+                <span>
+                  استان‌های محل فعالیت
+                </span>
+              </th>
+
+            </tr>
+          </thead>
+
+          <tbody md-body>
+            <tr md-row ng-repeat="executor in $ctrl.resp.results">
+              <td md-cell>
+                <a ui-sref="executor({'id':executor.id})">{{executor.name}}</a>
+              </td>
+              <td md-cell>{{executor.count| pNumber}}</td>
+              <td md-cell>{{executor.sum |pNumber | price}}</td>
+              <td md-cell>
+                <span class="organization-color" ng-repeat="organization in executor.top_organizations">
+                  <span ng-if="$index != 0">، </span>
+                  <a ui-sref="organization({'id':organization.id})">
+                    {{organization.display_name}}
+                  </a>
+                </span>
+              </td>
+              <td md-cell>
+                <span class="province-color" ng-repeat="province in executor.provinces">
+                  <span ng-if="$index != 0">، </span>
+                  <a ui-sref="list({'query':$root.encodeQuery({'city__town__province__id':province.id})})">
+                    {{province.name}}
+                  </a>
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </md-table-container>
+
+      <md-table-pagination md-limit="$ctrl.query.limit" md-limit-options="[5,10,20,50,100,1000,100000]" md-page="$ctrl.query.page"
+        md-total="{{$ctrl.resp.count}}" md-on-paginate="$ctrl.change" md-label="{page: 'صفحه', rowsPerPage: 'تعداد در هر صفحه', of: 'از'}"
+        md-page-select>
+      </md-table-pagination>
+    </md-card-content>
+  </md-card>
+</div> -->

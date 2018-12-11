@@ -1,0 +1,121 @@
+<section class="white padding-top-20 padding-bottom-20">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <ul class="nav nav-tabs nav-justified" id="errorContract" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#errorSpectrumTab">سازمان‌ها</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#topOrganizationsTab">ثبت‌کنندگان قراردادها</a>
+          </li>
+        </ul>
+
+        <div class="tab-content">
+          <div class="tab-pane active" id="errorSpectrumTab">
+            <div id="errorSpectrum"></div>
+
+            <md-table-container class="margin-top-30">
+              <div class="scrollbar" style="height: calc(100vh - 665px)">
+                <table md-table md-progress="promise">
+                  <thead md-head md-order="$ctrl.topOrganizationOrder">
+                    <tr md-row>
+                      <th md-column md-order-by="display_name">
+                        <span>
+                          نام سازمان
+                        </span>
+                      </th>
+                      <th md-column md-order-by="contracts_count">
+                        <span>
+                          تعداد قراردادها
+                        </span>
+                      </th>
+                      <th md-column md-order-by="errors_count">
+                        <span>
+                          تعداد خطاها
+                        </span>
+                      </th>
+                      <th md-column md-order-by="percent">
+                        <span>
+                          درصد خطاها
+                        </span>
+                      </th>
+                      <th md-column>
+                        <span>
+                          لینک به صفحه فهرست قراردادها
+                        </span>
+                      </th>
+                    </tr>
+                  </thead>
+
+                  <tbody md-body>
+                    <tr md-row ng-repeat="org in $ctrl.topOrganizations | orderBy:$ctrl.topOrganizationOrder ">
+                      <td md-cell>
+                        <a ui-sref="organization({'id':org.id})">{{org.display_name}}</a>
+                      </td>
+                      <td md-cell>{{org.contracts_count |pNumber }}</td>
+                      <td md-cell>{{org.errors_count |pNumber }}</td>
+                      <td md-cell>{{org.percent | number : 1 |pNumber }}</td>
+                      <td md-cell>
+                        <a ui-sref="list({'query':$root.encodeQuery({'top_organization__id':org.id})})">
+                          لینک
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </md-table-container>
+          </div>
+
+          <div class="tab-pane fade" id="topOrganizationsTab">
+            <div id="topOrganizations"></div>
+
+            <md-table-container class="margin-top-30">
+              <div class="scrollbar" style="height: calc(100vh - 526px)">
+                <table md-table md-progress="$ctrl.promise">
+                  <thead md-head md-order="$ctrl.peopleOrder">
+                    <tr md-row>
+                      <th md-column md-order-by="display_name">
+                        <span>
+                          نام ثبت‌کننده قرارداد
+                        </span>
+                      </th>
+                      <th md-column md-order-by="contracts_count">
+                        <span>
+                          تعداد قراردادها
+                        </span>
+                      </th>
+                      <th md-column md-order-by="errors_count">
+                        <span>
+                          تعداد خطاها
+                        </span>
+                      </th>
+                      <th md-column md-order-by="percent">
+                        <span>
+                          درصد خطاها
+                        </span>
+                      </th>
+                    </tr>
+                  </thead>
+
+                  <tbody md-body>
+                    <tr md-row ng-repeat="registrar in $ctrl.people | orderBy:$ctrl.peopleOrder ">
+                      <td md-cell>
+                        <a ui-sref="list({'query':$root.encodeQuery({'registrar__id':registrar.id})})">{{registrar.display_name}}</a>
+                      </td>
+                      <td md-cell>{{registrar.contracts_count |pNumber }}</td>
+                      <td md-cell>{{registrar.errors_count |pNumber }}</td>
+                      <td md-cell>{{registrar.percent | number : 1 |pNumber }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </md-table-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

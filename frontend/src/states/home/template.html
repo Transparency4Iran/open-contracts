@@ -1,0 +1,26 @@
+<section class="white padding-top-20 padding-bottom-20">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <md-nav-bar md-selected-nav-item="0">
+          <md-nav-item md-nav-click="renderOrganizationMonthCount()">
+            <i class="fas fa-chart-area"></i> نمودار مجموعی تعداد قرارداد از ابتدای سال ۹۴
+          </md-nav-item>
+          <md-nav-item md-nav-click="renderOrganizationMonthSum()">
+            <i class="fas fa-chart-area"></i> نمودار تجمیعی مجموع قرارداد از ابتدای سال ۹۴
+          </md-nav-item>
+          <md-nav-item md-nav-click="renderOrganizationYearCount()">
+            <i class="fas fa-chart-bar"></i> نمودار نواری انباشته تعداد قرارداد از ابتدای سال ۹۴
+          </md-nav-item>
+          <md-nav-item md-nav-click="renderOrganizationYearSum()">
+            <i class="fas fa-chart-bar"></i> نمودار نواری انباشته مجموع قرارداد از ابتدای سال ۹۴
+          </md-nav-item>
+        </md-nav-bar>
+
+        <div class="tab-content">
+          <div class="tab-pane active" id="chart" style="height: calc(100vh - 251px)"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

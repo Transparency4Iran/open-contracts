@@ -1,0 +1,12 @@
+.idea/
+npm-debug.log
+build/
+dist/
+node_modules/
+reports/
+yarn.lock
+.editorconfig
+.babelrc
+.eslintrc
+yarn-error.log
+package-lock.json

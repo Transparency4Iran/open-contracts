@@ -1,0 +1,36 @@
+<md-content class="" ng-class="{'spinner':loading}">
+  <div ng-controller="menuCtrl">
+
+    <md-toolbar layout="" class="md-toolbar-tools">
+      <div class="top__header" layout="row" layout-xs="column" layout-wrap>
+        <ul class="top__header__list" flex="60" flex-sm="70" flex-xs="100">
+          <li class="top__header__list__item"><a href="http://tp4.ir/" class="top__header__list__link" target="_blank">شفافیت
+              برای ایران</a></li>
+          <li class="top__header__list__item"><a href="https://discuss.tp4.ir/" class="top__header__list__link" target="_blank">انجمن</a></li>
+          <li class="top__header__list__item"><a href="http://about.tp4.ir" class="top__header__list__link" target="_blank">درباره‌ما</a></li>
+          <li class="top__header__list__item"><a href="http://contact.tp4.ir" class="top__header__list__link" target="_blank">تماس
+              با ما</a></li>
+          <li class="top__header__list__item"><a href="http://blog.tp4.ir/page/support" class="top__header__list__link"
+              target="_blank">حمایت از ما</a></li>
+        </ul>
+
+        <ul class="top__header__social" flex="40" flex-sm="30" flex-xs="100">
+          <li class="top__header__social__list"><a href="" class="top__header__social__link" target="_blank"><i class="fa fa-instagram"></i></a></li>
+          <li class="top__header__social__list"><a href="" class="top__header__social__link" target="_blank"><i class="fa fa-telegram"></i></a></li>
+          <li class="top__header__social__list"><a href="" class="top__header__social__link" target="_blank"><i class="fa fa-twitter"></i></a></li>
+          <li class="top__header__social__list"><a href="" class="top__header__social__link" target="_blank"><i class="fa fa-check-circle"></i></a></li>
+        </ul>
+      </div>
+    </md-toolbar>
+
+    <omid-navigation></omid-navigation>
+
+    <div flex layout="row">
+      <md-content flex id="content" class="_padding-md layout-content">
+        <ui-view />
+      </md-content>
+    </div>
+
+    <omid-footer></omid-footer>
+  </div>
+</md-content>

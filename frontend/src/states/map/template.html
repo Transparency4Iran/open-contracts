@@ -1,0 +1,148 @@
+<section class="white padding-top-20">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-10 col-md-12 col-sm-12 col-xs-12">
+        <div class="row">
+          <div class="col-lg-3 col-md-6 col-sm-12 nomargin">
+            <md-input-container class="width-full">
+              <label class="contract__filter__label" for="top">سازمان بالایی</label>
+              <md-select id="top" ng-model="$ctrl.query.top_organization" ng-change="$ctrl.changeTopOrganization()">
+                <md-option class="contracts__filter__option" value="">همه</md-option>
+                <md-option class="contracts__filter__option" ng-value="x.id" ng-repeat="x in $ctrl.topOrganizations | orderBy:'display_name'">{{
+                  x.display_name }}</md-option>
+              </md-select>
+            </md-input-container>
+          </div>
+
+          <div class="col-lg-3 col-md-6 col-sm-12 nomargin" ng-if="$ctrl.leaves">
+            <md-input-container class="width-full">
+              <label class="contract__filter__label" for="leaf">کارفرما</label>
+              <md-select id="leaf" ng-model="$ctrl.query.organization">
+                <md-option class="contracts__filter__option" value="">همه</md-option>
+                <md-option class="contracts__filter__option" ng-value="x.id" ng-repeat="x in $ctrl.leaves | orderBy:'displayPath'">{{
+                  x.displayPath }}</md-option>
+              </md-select>
+            </md-input-container>
+          </div>
+
+          <div class="col-lg-3 col-md-6 col-sm-12 nomargin">
+            <md-input-container class="width-full">
+              <label class="contract__filter__label" for="start_contract_date">تاریخ قرارداد از:</label>
+              <adm-dtp id="start_contract_date" ng-model='$ctrl.start_contract_date' options='{calType: "jalali", format: "YYYY/MM/DD",dtpType:"date",autoClose:true}'></adm-dtp>
+            </md-input-container>
+          </div>
+
+          <div class="col-lg-3 col-md-6 col-sm-12 nomargin">
+            <md-input-container class="width-full">
+              <label class="contract__filter__label" for="end_contract_date"> تا:</label>
+              <adm-dtp id="end_contract_date" ng-model='$ctrl.end_contract_date' options='{calType: "jalali", format: "YYYY/MM/DD",dtpType:"date",autoClose:true}'></adm-dtp>
+            </md-input-container>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+        <button class="btn btn-block btn-success btn-lg nomargin noradius" ng-click="$ctrl.change()">اعمال</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <hr>
+  </div>
+</section>
+
+<section class="white">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <header class="text-right">
+          <h3 class="size-18 weight-500 margin-bottom-10 color-limeGreen"><i class="fa fa-map"></i> به تفکیک استان‌ها</h3>
+        </header>
+
+        <div id="province_div"></div>
+      </div>
+
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <header class="text-right">
+          <h3 class="size-18 weight-500 margin-bottom-10 color-limeGreen"><i class="fa fa-map-o"></i> به تفکیک
+            شهرستان‌ها</h3>
+        </header>
+
+        <div id="town_div"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <hr class="margin-top-20">
+  </div>
+</section>
+
+<section class="white">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <header class="text-right">
+          <h3 class="size-18 weight-500 margin-bottom-10 color-limeGreen"><i class="fa fa-bar-chart-o"></i> نمودار</h3>
+        </header>
+
+        <div id="bar_chart"></div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div class="container-fluid">
+    <hr class="margin-top-20">
+  </div>
+</section>
+
+<section class="white padding-top-0 padding-bottom-20">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-sm-12">
+        <header class="text-right">
+          <h3 class="size-18 weight-500 margin-bottom-10 color-limeGreen"><i class="fa fa-table"></i> جدول</h3>
+        </header>
+
+        <md-table-container>
+          <div class="scrollbar" style="height: calc(100vh - 288px)">
+            <table md-table md-progress="$ctrl.promise">
+              <thead fix-head md-head md-order="$ctrl.ordering">
+                <tr md-row>
+                  <th md-column md-order-by="province">
+                    <span>
+                      استان
+                    </span>
+                  </th>
+                  <th md-column md-order-by="count">
+                    <span>
+                      تعداد قرارداد
+                    </span>
+                  </th>
+                  <th md-column md-order-by="sum">
+                    <span>
+                      مجموع مبالغ قراردادها
+                    </span>
+                  </th>
+
+                </tr>
+              </thead>
+
+              <tbody md-body>
+                <tr md-row ng-repeat="item in $ctrl.onProvince | orderBy: $ctrl.ordering ">
+                  <td md-cell>
+                    <a ui-sref="list({'query':$root.encodeQuery({'city__town__province__id':item.province_id})})">{{item.province}}</a>
+                  </td>
+                  <td md-cell>{{item.count |pNumber}}</td>
+                  <td md-cell>{{item.sum |pNumber | price}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </md-table-container>
+      </div>
+    </div>
+  </div>
+</section>
